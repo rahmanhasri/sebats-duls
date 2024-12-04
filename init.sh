@@ -1,7 +1,4 @@
-#!/bin/zsh
-
-# Disable keyboard accents
-defaults write -g ApplePressAndHoldEnabled -bool false
+#!/bin/sh
 
 # Install CLI Tools
 brew install \
@@ -14,51 +11,49 @@ ripgrep \
 tmux \
 tree \
 vim \
-wget
+wget \
 
-# Install GUIs
+# Install Terminal
+brew install --cask warp
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+# Install Browser  
 brew install --cask \
-android-file-transfer \
+zen-browser \
+chromium \
+google-chrome
+
+# Install General GUI
+brew install --cask  \
+whatsapp \
 discord \
-firefox \
-google-chrome \
-iterm2 \
-obs \
-postico \
-postman \
 qbittorrent \
-slack \
 spotify \
 the-unarchiver \
 visual-studio-code \
-vlc
+vlc \
+rectangle \
+raindropio
 
-# Setup tmux
-cd
-git clone https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf
+# Install Devs GUI
+brew install --cask \
+insomnium \
+hoppscotch \
+tableplus
 
-# Install NVM
+# Install Docker
+brew install --cask docker
+
+# Install NVM & Install latest node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install --lts
 nvm use --lts
 
-# Clone personal public dotfiles
-cd
-git clone https://github.com/dmtrxw/public-dotfiles.git
-rm -rf public-dotfiles/.git/
-cp -r public-dotfiles/.* .
-rm -rf public-dotfiles
+# Install jwt-cli
+brew install mike-engel/jwt-cli/jwt-cli
 
-npm install -g \
-json-server \
-neovim \
-nodemon \
-pm2 \
-prettier \
-serve \
-typescript-language-server \
-typescript
+# Install Docker
+brew install --cask docker
+
