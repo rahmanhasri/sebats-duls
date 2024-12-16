@@ -15,7 +15,6 @@ wget \
 
 # Install Terminal
 brew install --cask warp
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 # Install Browser  
 brew install --cask \
@@ -33,7 +32,8 @@ the-unarchiver \
 visual-studio-code \
 vlc \
 rectangle \
-raindropio
+raindropio \
+obsidian
 
 # Install Devs GUI
 brew install --cask \
@@ -53,6 +53,11 @@ nvm use --lts
 
 # Install jwt-cli
 brew install mike-engel/jwt-cli/jwt-cli
+
+# etc
+brew install --cask \
+appcleaner \
+imageoptim
 
 # Install Docker
 brew install --cask docker
