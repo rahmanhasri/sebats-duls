@@ -1,5 +1,7 @@
 #!/bin/sh
 
+shell_name=$(basename "$SHELL")
+
 # Install CLI Tools
 brew install \
 ack \
@@ -12,6 +14,7 @@ tmux \
 tree \
 vim \
 wget \
+asdf
 
 # Install Terminal
 brew install --cask warp
@@ -44,15 +47,40 @@ tableplus
 # Install Docker
 brew install --cask docker
 
-# Install NVM & Install latest node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install --lts
-nvm use --lts
+# Install fnm for Node Version Manager
+brew install fnm
+
+export_fnm_command='
+echo eval "$(fnm env --use-on-cd --shell zsh)"
+'
+
+# Install Pyenv
+brew install pyenv pyenv-virtualenv
+
+# Define the eval command to be appended
+export_py_command='
+# >>> pyenv initialize >>>
+eval "$(pyenv init --path)"
+if command -v pyenv-virtualenv-init >/dev/null; then
+  eval "$(pyenv virtualenv-init -)"
+fi
+# <<< pyenv initialize <<<
+'
+
+# Conditional logic to append the command to the correct file
+if [ "$shell_name" = "bash" ]; then
+  echo "$export_fnm_command" >> ~/.bashrc
+  echo "$export_py_command" >> ~/.bashrc
+elif [ "$shell_name" = "zsh" ]; then
+  echo "$export_fnm_command" >> ~/.zshrc
+  echo "$export_py_command" >> ~/.zshrc
 
 # Install jwt-cli
 brew install mike-engel/jwt-cli/jwt-cli
+
+
+# Install SDKMAN
+curl -s "https://get.sdkman.io" | bash
 
 # etc
 brew install --cask \
@@ -61,4 +89,3 @@ imageoptim
 
 # Install Docker
 brew install --cask docker
-
