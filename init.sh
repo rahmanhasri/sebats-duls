@@ -17,7 +17,7 @@ wget \
 asdf
 
 # Install Terminal
-brew install --cask warp
+brew install --cask ghostty
 
 # Install Browser  
 brew install --cask \
